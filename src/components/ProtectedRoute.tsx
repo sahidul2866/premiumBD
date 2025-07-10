@@ -19,6 +19,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requireAdmin 
   }
 
   if (!user) {
+    alert('Please log in first to access that page.');
     return <Navigate to="/" replace />;
   }
 

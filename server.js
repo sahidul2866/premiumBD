@@ -192,6 +192,14 @@ app.post('/api/products', verifyToken, requireAdmin, async (req, res) => {
 });
 
 // Order routes
+app.get('/api/orders', verifyToken, requireAdmin, async (req, res) => {
+  try {
+    const orders = await Order.find().sort({ createdAt: -1 });
+    res.json(orders);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
 app.post('/api/orders', verifyToken, async (req, res) => {
   try {
     const order = new Order({ ...req.body, user: req.user._id });
